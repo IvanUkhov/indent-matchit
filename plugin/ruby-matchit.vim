@@ -5,7 +5,7 @@
 " Modified: June 7, 2014 by Ivan Ukhov (https://github.com/IvanUkhov)
 "
 " When you hit `%`, the cursor jumps to the nearest line that has the same
-" indentation as the current line. The direction of the jump is determined
+" indentation as the current one. The direction of the jump is determined
 " based on the first word of the current line: if it is `end`, the search
 " goes upwards and downwards otherwise.
 "
