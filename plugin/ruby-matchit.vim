@@ -17,51 +17,43 @@
 " Since brave programmers use indentation, this will work for most of you, I
 " hope. At least, it works for me. ;-)
 " }}}
-function! s:Ruby_Matchit()
-  " use default matching for parenthesis, brackets and braces:
+function! s:RubyMatchIt()
+  " Preserve the default behavior for parentheses, brackets and braces
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal \\\\\
     return
   endif
 
   normal ^
-  sil! let curr_word = expand('<cword>')
-  if curr_word == ""
+  silent! let current_word = expand('<cword>')
+
+  if current_word == ""
     return
   endif
 
-  let curr_line = line(".")
+  let current_line = line(".")
   let spaces = strlen(matchstr(getline("."), "^\\s*"))
 
-  if curr_word =~ '\<end\>'
-    while 1
-      normal k
-      if strlen(matchstr(getline("."), "^\\s*")) == spaces
-            \&& getline(".") !~ "^\\s*$"
-            \&& getline(".") !~ "^#"
-        normal ^
-        break
-      elseif line(".") == 1
-        exe 'normal ' . curr_line . 'G'
-        break
-      endif
-    endwhile
-  elseif curr_word =~ '\<\(if\|unless\|elsif\|else\|case\|when\|while\|'
-        \.'until\|def\|\|module\|class\)\>'
-    while 1
-      normal j
-      if strlen(matchstr(getline("."), "^\\s*")) == spaces
-            \&& getline(".") !~ "^\\s*$"
-            \&& getline(".") !~ "^#"
-        normal ^
-        break
-      elseif line(".") == line("$")
-        exe 'normal ' . curr_line . 'G'
-        break
-      endif
-    endwhile
-  endif
+  if current_word =~ '\<end\>'
+    let move = 'k'
+  else
+    let move = 'j'
+  end
+
+  while 1
+    exe 'normal ' . move
+    if strlen(matchstr(getline("."), "^\\s*")) == spaces
+      \ && getline(".") !~ "^\\s*$"
+      \ && getline(".") !~ "^#"
+
+      normal ^
+      break
+    elseif line(".") == 1
+      exe 'normal ' . current_line . 'G'
+      break
+    endif
+  endwhile
 endfunction
 
 nnoremap <buffer> \\\\\ %
-nnoremap <buffer> % :call <SID>Ruby_Matchit()<CR>
+nnoremap <buffer> % :call <SID>RubyMatchIt()<CR>
