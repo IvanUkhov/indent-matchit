@@ -1,22 +1,14 @@
-" FILE: "/home/johannes/ruby.vim"
-" Last Modification: "Mon, 06 May 2002 23:42:11 +0200 (johannes)"
-" Additional settings for Ruby
-" Johannes Tanzler, <jtanzler@yline.com>
-
-" Matchit for Ruby: '%' {{{
+" Ruby MatchIt
 "
-"   This function isn't very sophisticated. It just takes care of indentation.
-" (I've written it, because I couldn't extend 'matchit.vim' to handle Ruby
-" files correctly (that's because everything in Ruby ends with 'end' -- no
-" 'endif', 'endclass' etc.))
+" Author: Johannes Tanzler (http://www.vim.org/account/profile.php?user_id=223)
+" Source: http://www.vim.org/scripts/script.php?script_id=290
+" Modified: June 7, 2014 by Ivan Ukhov (https://github.com/IvanUkhov)
 "
-" If you're on the line `if x', then the cursor will jump to the next line
-" with the same indentation as the if-clause. The same is true for a whole
-" bunch of keywords -- see below for details.
+" When you hit `%`, the cursor jumps to the nearest line that has the same
+" indentation as the current line. The direction of the jump is determined
+" based on the first word of the current line: if it is `end`, the search
+" goes upwards and downwards otherwise.
 "
-" Since brave programmers use indentation, this will work for most of you, I
-" hope. At least, it works for me. ;-)
-" }}}
 function! s:RubyMatchIt()
   " Preserve the default behavior for parentheses, brackets and braces
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
