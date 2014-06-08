@@ -28,8 +28,10 @@ function! s:RubyMatchIt()
 
   if current_word =~ '\<end\>'
     let move = 'k'
+    let stop = 1
   else
     let move = 'j'
+    let stop = line("$")
   end
 
   while 1
@@ -40,7 +42,7 @@ function! s:RubyMatchIt()
 
       normal ^
       break
-    elseif line(".") == 1
+    elseif line(".") == stop
       exe 'normal ' . current_line . 'G'
       break
     endif
