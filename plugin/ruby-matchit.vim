@@ -9,7 +9,7 @@
 " based on the first word of the current line: if it is `end`, the search
 " goes upwards and downwards otherwise.
 "
-function! s:RubyMatchIt()
+function! RubyMatchIt()
   " Preserve the default behavior for parentheses, brackets and braces
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal \\\\\
@@ -49,5 +49,5 @@ function! s:RubyMatchIt()
   endwhile
 endfunction
 
-nnoremap <buffer> \\\\\ %
-nnoremap <buffer> % :call <SID>RubyMatchIt()<CR>
+nnoremap \\\\\ %
+nmap % :call RubyMatchIt()<CR>
