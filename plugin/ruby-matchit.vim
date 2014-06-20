@@ -1,16 +1,19 @@
 " Ruby MatchIt
 "
+" Original version:
 " Author: Johannes Tanzler (http://www.vim.org/account/profile.php?user_id=223)
 " Source: http://www.vim.org/scripts/script.php?script_id=290
-" Modified: June 7, 2014 by Ivan Ukhov (https://github.com/IvanUkhov)
+"
+" Current version:
+" Author: Ivan Ukhov (https://github.com/IvanUkhov)
+" Source: https://github.com/IvanUkhov/ruby-matchit
 "
 " When you hit `%`, the cursor jumps to the nearest line that has the same
 " indentation as the current one. The direction of the jump is determined
-" based on the first word of the current line: if it is `end`, the search
-" goes upwards and downwards otherwise.
+" based on the first word of the current line: if it begins with `end`,
+" the search goes upwards and downwards otherwise.
 "
 function! RubyMatchIt()
-  " Preserve the default behavior for parentheses, brackets and braces
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal \\\\\
     return
@@ -26,7 +29,7 @@ function! RubyMatchIt()
   let current_line = line(".")
   let spaces = strlen(matchstr(getline("."), "^\\s*"))
 
-  if current_word =~ '\<end\>'
+  if current_word =~ '\<end'
     let move = 'k'
     let stop = 1
   else
@@ -50,4 +53,4 @@ function! RubyMatchIt()
 endfunction
 
 nnoremap \\\\\ %
-nmap % :call RubyMatchIt()<CR>
+nnoremap % :call RubyMatchIt()<CR>
