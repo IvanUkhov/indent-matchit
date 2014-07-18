@@ -10,8 +10,8 @@ indentation as the current one. The direction of the jump is determined
 based on the first word of the current line: if it begins with `end`,
 the search goes upwards and downwards otherwise.
 
-The plugin preserves the original behavior of `%` with respect to
-parentheses (`()`), brackets (`[]`), and braces (`{}`).
+The original behavior of `%` with respect to parentheses, brackets, and
+braces is preserved.
 
 ## Why does it exist?
 
