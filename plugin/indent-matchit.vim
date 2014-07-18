@@ -1,4 +1,4 @@
-" Ruby MatchIt
+" Indent MatchIt
 "
 " Original version:
 " Author: Johannes Tanzler (http://www.vim.org/account/profile.php?user_id=223)
@@ -13,7 +13,10 @@
 " based on the first word of the current line: if it begins with `end`,
 " the search goes upwards and downwards otherwise.
 "
-function! RubyMatchIt()
+" The plugin preserves the original behavior of `%` with respect to
+" parentheses (`()`), brackets (`[]`), and braces (`{}`).
+"
+function! IndentMatchIt()
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal! %
     return
@@ -52,4 +55,4 @@ function! RubyMatchIt()
   endwhile
 endfunction
 
-nnoremap % :call RubyMatchIt()<CR>
+nnoremap % :call IndentMatchIt()<CR>
