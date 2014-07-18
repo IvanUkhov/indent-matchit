@@ -15,7 +15,7 @@
 "
 function! RubyMatchIt()
   if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
-    normal \\\\\
+    normal! %
     return
   endif
 
@@ -52,5 +52,4 @@ function! RubyMatchIt()
   endwhile
 endfunction
 
-nnoremap \\\\\ %
 nnoremap % :call RubyMatchIt()<CR>
