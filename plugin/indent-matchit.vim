@@ -16,7 +16,7 @@
 " The original behavior of `%` for parentheses, brackets, and braces as well
 " as the original behavior of `{count}%` are preserved.
 "
-function! IndentMatchIt()
+function! s:IndentMatchIt()
   if v:count > 0
     exe 'normal! ' . v:count . '%'
     return
@@ -59,4 +59,4 @@ function! IndentMatchIt()
   endwhile
 endfunction
 
-nnoremap % :<C-U>call IndentMatchIt()<CR>
+nnoremap % :<C-U>call <SID>IndentMatchIt()<CR>
