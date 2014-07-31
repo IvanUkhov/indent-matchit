@@ -49,7 +49,6 @@ function! IndentMatchIt()
     exe 'normal ' . move
     if strlen(matchstr(getline('.'), '^\s*')) == spaces
       \ && getline('.') !~ '^\s*$'
-      \ && getline('.') !~ '^#'
 
       normal ^
       break
