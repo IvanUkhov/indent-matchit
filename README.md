@@ -10,8 +10,8 @@ indentation as the current one. The direction of the jump is determined
 based on the first word of the current line: if it begins with `end`,
 the search goes upwards and downwards otherwise.
 
-The original behavior of `%` with respect to parentheses, brackets, and
-braces is preserved.
+The original behavior of `%` for parentheses, brackets, and braces as well
+as the original behavior of `{count}%` are preserved.
 
 ## Why does it exist?
 

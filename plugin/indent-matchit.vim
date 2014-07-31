@@ -13,11 +13,16 @@
 " based on the first word of the current line: if it begins with `end`,
 " the search goes upwards and downwards otherwise.
 "
-" The original behavior of `%` with respect to parentheses, brackets, and
-" braces is preserved.
+" The original behavior of `%` for parentheses, brackets, and braces as well
+" as the original behavior of `{count}%` are preserved.
 "
 function! IndentMatchIt()
-  if strpart(getline("."), col(".")-1, 1) =~ '(\|)\|{\|}\|\[\|\]'
+  if v:count > 0
+    exe 'normal! ' . v:count . '%'
+    return
+  end
+
+  if strpart(getline("."), col(".") - 1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal! %
     return
   endif
@@ -55,4 +60,4 @@ function! IndentMatchIt()
   endwhile
 endfunction
 
-nnoremap % :call IndentMatchIt()<CR>
+nnoremap % :<C-U>call IndentMatchIt()<CR>
