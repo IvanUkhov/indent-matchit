@@ -22,7 +22,7 @@ function! IndentMatchIt()
     return
   end
 
-  if strpart(getline("."), col(".") - 1, 1) =~ '(\|)\|{\|}\|\[\|\]'
+  if strpart(getline('.'), col('.') - 1, 1) =~ '(\|)\|{\|}\|\[\|\]'
     normal! %
     return
   endif
@@ -30,30 +30,30 @@ function! IndentMatchIt()
   normal ^
   silent! let current_word = expand('<cword>')
 
-  if current_word == ""
+  if current_word == ''
     return
   endif
 
-  let current_line = line(".")
-  let spaces = strlen(matchstr(getline("."), "^\\s*"))
+  let current_line = line('.')
+  let spaces = strlen(matchstr(getline('.'), '^\s*'))
 
   if current_word =~ '\<end'
     let move = 'k'
     let stop = 1
   else
     let move = 'j'
-    let stop = line("$")
+    let stop = line('$')
   end
 
   while 1
     exe 'normal ' . move
-    if strlen(matchstr(getline("."), "^\\s*")) == spaces
-      \ && getline(".") !~ "^\\s*$"
-      \ && getline(".") !~ "^#"
+    if strlen(matchstr(getline('.'), '^\s*')) == spaces
+      \ && getline('.') !~ '^\s*$'
+      \ && getline('.') !~ '^#'
 
       normal ^
       break
-    elseif line(".") == stop
+    elseif line('.') == stop
       exe 'normal ' . current_line . 'G'
       break
     endif
